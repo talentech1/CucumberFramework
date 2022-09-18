@@ -2,10 +2,11 @@ package com.tt.definations;
 
 import java.time.Duration;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+
+import com.tt.pages.HomePage;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -15,8 +16,10 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginPageStepDefinations {
-	private static WebDriver driver;
+	public static WebDriver driver;
 	public final static int TIMEOUT = 10;
+	
+	HomePage homePage;
 
 	@Before
 	public void setUp() {
@@ -35,26 +38,19 @@ public class LoginPageStepDefinations {
 	@Given("I am on the Home page")
     public void goToHomepage() {
         driver.get("https://www.saucedemo.com/");
+
+        homePage = new HomePage(driver);
+        
 	}
 	
 	@When("I login using valid credentials")
 	public void validLogin() {
-		driver.findElement(By.id("user-name")).sendKeys("standard_user");
-		driver.findElement(By.id("password")).sendKeys("secret_sauce");
-		driver.findElement(By.id("login-button")).click();
-	}
-	
-	@Then("I should be on the Inventory Page")
-	public void checkInventoryPage() {
-		String currentUrl = driver.getCurrentUrl();
-		Assert.assertEquals(currentUrl, "https://www.saucedemo.com/inventory.html");
+		homePage.login("standard_user", "secret_sauce");
 	}
 	
 	@When("I login using invalid credentials")
 	public void i_login_using_invalid_credentials() {
-		driver.findElement(By.id("user-name")).sendKeys("xyz");
-		driver.findElement(By.id("password")).sendKeys("secret_sauce");
-		driver.findElement(By.id("login-button")).click();
+		homePage.login("xyz", "secret_sauce");
 	}
 	@Then("I should be on the Home page")
 	public void i_should_be_on_the_home_page() {
