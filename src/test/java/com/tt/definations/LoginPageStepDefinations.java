@@ -49,4 +49,16 @@ public class LoginPageStepDefinations {
 		String currentUrl = driver.getCurrentUrl();
 		Assert.assertEquals(currentUrl, "https://www.saucedemo.com/inventory.html");
 	}
+	
+	@When("I login using invalid credentials")
+	public void i_login_using_invalid_credentials() {
+		driver.findElement(By.id("user-name")).sendKeys("xyz");
+		driver.findElement(By.id("password")).sendKeys("secret_sauce");
+		driver.findElement(By.id("login-button")).click();
+	}
+	@Then("I should be on the Home page")
+	public void i_should_be_on_the_home_page() {
+		String currentUrl = driver.getCurrentUrl();
+		Assert.assertEquals(currentUrl, "https://www.saucedemo.com/");
+	}
 }

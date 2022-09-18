@@ -3,8 +3,8 @@ package com.tt.runner;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(tags = "", features = {"src/test/resources/features/Login.feature"}, glue = {"com.tt.definations"},
-plugin = {})
+@CucumberOptions(tags = "@automated", features = {"src/test/resources/features/Login.feature"}, glue = {"com.tt.definations"},
+plugin = { "pretty", "html:target/cucumber-reports.html" })
 public class CucumberRunnerTests extends AbstractTestNGCucumberTests {
 
 }
