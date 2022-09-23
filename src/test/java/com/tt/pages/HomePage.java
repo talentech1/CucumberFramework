@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.tt.utilities.SetupDriver;
+
 public class HomePage {
 	WebDriver driver;
 	
@@ -17,8 +19,8 @@ public class HomePage {
 	@FindBy(id="login-button")
 	WebElement loginButton;
 	
-	public HomePage(WebDriver driver) {
-		this.driver = driver;
+	public HomePage() {
+		this.driver = SetupDriver.driver;
 		PageFactory.initElements(driver, this);
 	}
 	
